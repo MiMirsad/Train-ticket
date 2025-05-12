@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Train Tickets Registration</title>
+    <link rel="stylesheet" href="reg.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="background-train">
+        <div class="train-body">
+            <div class="train-window"></div>
+            <div class="smoke"></div>
+            <div class="smoke"></div>
+            <div class="smoke"></div>
+        </div>
+        <div class="train-wheel"></div>
+        <div class="train-wheel"></div>
+    </div>
+
+    <div class="page-container">
+        <header class="header">
+            <h1>Train Tickets</h1>
+        </header>
+
+        <div class="reg">
+            <p id="Regsiter">Register</p>
+            <form>
+                <input type="text" placeholder="Nom" id="Nom" required>
+                <input type="text" placeholder="Prenom" id="Prenom" required>
+                <input type="text" placeholder="Username" id="user" required>
+                <input type="password" placeholder="Password" id="pass" required>
+                <input type="text" placeholder="Ville" id="Ville" required>
+                <input type="text" placeholder="Adress" id="Adress" required>
+                <input type="tel" placeholder="Tel" id="Tel" required>
+                <input type="text" placeholder="Cin" id="Cin" required>
+                <input type="text" placeholder="Security Question" id="qts" required>
+                <input type="text" placeholder="Answer" id="answr" required>
+                <input list="roles" id="Type" name="role" placeholder="Select Role" required/>
+                <datalist id="roles">
+                    <option value="admin">
+                    <option value="user">
+                </datalist>
+                <button type="submit" id="Regsiterbutn">Register</button>
+            </form>
+        </div>
+
+        <div id="messageBox" style="display:none;"></div>
+    </div>
+
+    <script type="module" src="reg.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bcryptjs@2.4.3/dist/bcrypt.min.js"></script>
+</body>
+</html>

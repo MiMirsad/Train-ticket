@@ -1,0 +1,278 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', 'Noto Sans KR', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+@keyframes trainMovement {
+    0% {
+        transform: translateX(-100%);
+    }
+    100% {
+        transform: translateX(100vw);
+    }
+}
+
+@keyframes smokeAnimation {
+    0% {
+        opacity: 0.6;
+        transform: translateX(0) scale(1);
+    }
+    50% {
+        opacity: 0.4;
+        transform: translateX(20px) scale(1.2);
+    }
+    100% {
+        opacity: 0;
+        transform: translateX(50px) scale(1.5);
+    }
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+    overflow-x: hidden;
+}
+
+body {
+    background: linear-gradient(135deg, #141e30 0%, #243b55 100%);
+    color: #e0e0e0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0;
+    position: relative;
+    overflow-y: auto;
+}
+
+.page-container {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+    padding-bottom: 150px; /* Extra padding for bottom of page */
+    overflow-y: auto;
+}
+
+.background-train {
+    position: fixed;
+    bottom: 50px;
+    left: -200px;
+    width: 300px;
+    height: 100px;
+    z-index: -1;
+    animation: trainMovement 15s linear infinite;
+}
+
+/* (Train animation CSS remains the same as in previous version) */
+.train-body {
+    position: absolute;
+    width: 250px;
+    height: 50px;
+    background: linear-gradient(to right, #4a4a4a, #6a6a6a);
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+.train-window {
+    position: absolute;
+    width: 40px;
+    height: 30px;
+    background: #87CEEB;
+    border-radius: 5px;
+    top: 10px;
+    left: 20px;
+}
+
+.train-wheel {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    background: #333;
+    border-radius: 50%;
+    bottom: -15px;
+}
+
+.train-wheel:nth-child(1) {
+    left: 30px;
+}
+
+.train-wheel:nth-child(2) {
+    right: 30px;
+}
+
+.smoke {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    background: rgba(200,200,200,0.5);
+    border-radius: 50%;
+    top: -20px;
+    right: -40px;
+    animation: smokeAnimation 2s ease-out infinite;
+}
+
+.smoke:nth-child(2) {
+    animation-delay: 0.5s;
+    width: 40px;
+    height: 40px;
+}
+
+.smoke:nth-child(3) {
+    animation-delay: 1s;
+    width: 35px;
+    height: 35px;
+}
+
+body::before {
+    content: '';
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 150px;
+    background: linear-gradient(to top, rgba(20,30,48,0.8), transparent);
+    z-index: 1;
+}
+
+.header {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    padding: 1rem;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    position: relative;
+    z-index: 10;
+    text-align: center;
+}
+
+.header h1 {
+    color: #fff;
+    font-size: 1.5rem;
+    font-weight: 600;
+    letter-spacing: -0.5px;
+}
+
+.reg {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 2rem;
+    width: 100%;
+    max-width: 500px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    position: relative;
+    z-index: 10;
+    margin-bottom: 2rem;
+}
+
+#Regsiter {
+    text-align: center;
+    color: #fff;
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    font-weight: 600;
+    letter-spacing: -0.5px;
+}
+
+.reg form {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+}
+
+.reg input, #Type {
+    width: 100%;
+    padding: 0.75rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    color: #fff;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    outline: none;
+}
+
+.reg input:focus, #Type:focus {
+    border-color: rgba(255, 255, 255, 0.3);
+    box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.1);
+}
+
+.reg input::placeholder, #Type::placeholder {
+    color: rgba(224, 224, 224, 0.4);
+}
+
+#Regsiterbutn {
+    width: 100%;
+    padding: 1rem;
+    background: linear-gradient(to right, #4a90e2, #6f52cc);
+    color: #fff;
+    border: none;
+    border-radius: 12px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    letter-spacing: 0.5px;
+    margin-top: 1rem;
+}
+
+#Regsiterbutn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(74, 144, 226, 0.3);
+}
+
+#messageBox {
+    width: 100%;
+    max-width: 500px;
+    text-align: center;
+    margin-top: 1rem;
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    border-radius: 12px;
+    padding: 1rem;
+}
+
+@media (min-width: 768px) {
+    .reg form {
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+    }
+}
+
+@media (max-width: 600px) {
+    .reg {
+        padding: 1.5rem;
+        margin: 1rem;
+    }
+
+    #Regsiter {
+        font-size: 1.3rem;
+    }
+
+    .background-train {
+        width: 200px;
+        bottom: 20px;
+    }
+
+    .header h1 {
+        font-size: 1.2rem;
+    }
+}
+
+/* Datalist styling */
+#roles {
+    display: none;
+}
+
+/* Custom dropdown for roles */
+#Type {
+    appearance: none;
+    background: rgba(255, 255, 255, 0.05) url('data:image/svg+xml;utf8,<svg fill="%23ffffff" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/><path d="M0 0h24v24H0z" fill="none"/></svg>') no-repeat right 1rem center;
+    background-size: 24px;
+    padding-right: 2.5rem;
+}
