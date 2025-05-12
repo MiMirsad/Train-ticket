@@ -51,6 +51,77 @@ function checkTelephone() {
 }
 const Regsiterbutn = document.getElementById('Regsiterbutn');
 
+function validateEmail(email) {
+  const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return regex.test(email);
+}
+function highlightField(fieldId) {
+  const field = document.getElementById(fieldId);
+  const container = document.querySelector('.reg');
+  
+  // Add shake animation
+  field.classList.add("shake", "invalid");
+  container.classList.add("shake");
+  
+  // Scroll to the field and focus
+  field.scrollIntoView({ behavior: "smooth", block: "center" });
+  field.focus();
+  
+  // Remove shake animation after 500ms
+  setTimeout(() => {
+    field.classList.remove("shake");
+    container.classList.remove("shake");
+  }, 500);
+}
+
+document.getElementById('Regsiterbutn').addEventListener('click', async function (e) {
+  e.preventDefault();
+  
+
+  const inputs = document.querySelectorAll('.reg input');
+  let isValid = true;
+  let firstInvalidField = null;
+
+  inputs.forEach(input => {
+    input.classList.remove("invalid");
+  });
+
+  inputs.forEach(input => {
+    if (!input.value.trim()) {
+      isValid = false;
+      input.classList.add("invalid");
+
+      if (!firstInvalidField) {
+        firstInvalidField = input;
+      }
+    }
+  });
+
+  if (!isValid) {
+    if (firstInvalidField) {
+      highlightField(firstInvalidField.id);
+    }
+    showMessage("Please fill in all fields", true);
+    return;
+  }
+  
+  const waitforfunction = await checkIfUsernameIsUsed();
+  if (waitforfunction === false) {
+    showMessage("Username is already in use", true);
+    return;
+  }
+  
+  const checknum = await checkTelephone();
+  if (checknum === false) {
+    showMessage("Please enter a valid phone number", true);
+    return;
+  }
+  
+
+  showMessage("Registration successful!", false);
+});
+
+
 Regsiterbutn.addEventListener('click', async function (e) {
   e.preventDefault();
 
@@ -62,7 +133,7 @@ Regsiterbutn.addEventListener('click', async function (e) {
 
   const checknum = await checkTelephone();
   if (checknum === false) {
-    showMessage("tel is not a number", true);
+    showMessage("Please enter a valid phone number", true);
     return;
   }
 
@@ -72,7 +143,12 @@ Regsiterbutn.addEventListener('click', async function (e) {
 
     const rawanswer = document.getElementById("answr").value;
     const hashedanswer = await Hashanwsr(rawanswer);
-
+  const email = document.getElementById("email").value;
+  const isEmailValid = validateEmail(email);
+  if (!isEmailValid) {
+    showMessage("Invalid email address", true);
+    return;
+  }
     const data = {
       pers_nom: document.getElementById("Nom").value,
       pers_prenom: document.getElementById("Prenom").value,
@@ -85,6 +161,7 @@ Regsiterbutn.addEventListener('click', async function (e) {
       type: document.getElementById("Type").value,
       securti_question: document.getElementById("qts").value,
       securti_anwser: hashedanswer,
+          email: valdem,
     };
 
     const { error } = await supabase
@@ -105,6 +182,7 @@ Regsiterbutn.addEventListener('click', async function (e) {
     console.error('Registration error:', err);
   }
 });
+
 
 const messageBox = document.getElementById('messageBox');
 
