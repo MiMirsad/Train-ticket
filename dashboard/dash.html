@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="dash.css">
+       <div class="logo">
+            <span class="logo-icon">🚆</span>
+            <h1>Train Tickets Management</h1>
+        </div>
+</head>
+<body>
+   
+    <div class="admin-container">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h2>Admin Dashboard</h2>
+            </div>
+             <div class="sidebar-menu">
+                <a href="/reg/reg.html" class="sidebar-link"> 
+                    <span class="sidebar-icon">👥</span>
+                    <span>Add Personnel</span>
+                </a>
+                <a href="/gare/gare.html" class="sidebar-link">
+                    <span class ="sidebar-icon">➕</span>
+                    <span>add setation</span>
+                </a>
+                <a href="/train/train.html" class="sidebar-link">
+                <span class="sidebar-icon">🚆</span>  
+                <span>Add Train</span>  
+                </a>
+                 <a href="/Trainrout/trainrout.html" class="sidebar-link">
+                <span class="sidebar-icon">🚆 ➕</span>  
+                <span>Add Train</span>  
+                </a>
+             </div>
+             <div class="sidebar-footer">
+                <a href="/login/login.html" class="logout-btn">
+                     <span class="sidebar-icon">🔒</span>
+                    <span>Logout</span>
+                </a>
+
+             </div>
+        </aside>
+        
+        <main class="main-content">
+            <div class="dashboard-header">
+                <h1>Welcome to Train Management System</h1>
+                <p>Manage your stations, trains, personnel, and routes from one central dashboard.</p>
+            </div>
+
+            <div class="dashboard-cards">
+                <div class="card">
+                    <h3 class="card-title">
+                        <span class="card-title-icon">🏢</span>
+                        <span>Stations</span>
+                    </h3>
+                    <p class="card-content">Add and manage train stations across your network. Update locations, facilities, and operating hours.</p>
+                    <div class="card-footer">
+                        <a href="add_gare.html" class="btn btn-primary">Manage Stations</a>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <h3 class="card-title">
+                        <span class="card-title-icon">🚆</span>
+                        <span>Trains</span>
+                    </h3>
+                    <p class="card-content">Maintain your fleet of trains, update train information, capacity, and operational status.</p>
+                    <div class="card-footer">
+                        <a href="add_train.html" class="btn btn-primary">Manage Trains</a>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <h3 class="card-title">
+                        <span class="card-title-icon">👥</span>
+                        <span>Personnel</span>
+                    </h3>
+                    <p class="card-content">Manage staff members, their roles, schedules, and permissions across your railway network.</p>
+                    <div class="card-footer">
+                        <a href="add_personnel.html" class="btn btn-primary">Manage Personnel</a>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <h3 class="card-title">
+                        <span class="card-title-icon">🛤️</span>
+                        <span>Routes</span>
+                    </h3>
+                    <p class="card-content">Create and modify train routes, schedules, stops, and connections between stations.</p>
+                    <div class="card-footer">
+                        <a href="add_trajet.html" class="btn btn-primary">Manage Routes</a>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bcryptjs@2.4.3/dist/bcrypt.min.js"></script>
+    <script type="module" src="landing.js"></script>
+</body>
+</html>
