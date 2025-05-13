@@ -7,13 +7,20 @@
 <link rel="stylesheet" href="login.css">
 </head>
 <body>
-
+<div id="msgModal" class="modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.4); z-index: 1000;">
+  <div class="modal-content" style="background-color: white; margin: 15% auto; padding: 20px; border: 1px solid #888; width: 80%; max-width: 500px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.2);">
+    <span class="close-btn" style="color: #aaa; float: right; font-size: 28px; font-weight: bold; cursor: pointer;">&times;</span>
+    <h2 id="msgTitle" style="margin-top: 0; color: #333;"></h2>
+    <p id="msgText" style="color: #555;"></p>
+    <button id="msgOkBtn" style="background-color: #4CAF50; color: white; border: none; padding: 10px 20px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; margin: 4px 2px; cursor: pointer; border-radius: 4px;">OK</button>
+  </div>
+</div>
   <div class="login-container">
     <h2>Login</h2>
-    <form>
+    <form class="reg">
       <div class="form-group">
-        <label for="email">Email</label>
-        <input type="email" id="email" placeholder="Enter your email" required>
+        <label for="email">Username</label>
+        <input type="text" id="Username" placeholder="Enter your Username" required>
       </div>
 
       <div class="form-group">
@@ -26,9 +33,10 @@
         <label for="remember">Remember Me</label>
       </div>
 
-      <button type="submit" class="login-button">Login</button>
+      <button type="submit" id="lgnb">Login</button>
     </form>
   </div>
-
+    <script src="https://cdn.jsdelivr.net/npm/bcryptjs@2.4.3/dist/bcrypt.min.js"></script>
+    <script type="module" src="login.js"></script>
 </body>
 </html>

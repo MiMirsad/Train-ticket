@@ -1,7 +1,9 @@
 import supabase from '/supabaseClient.js'
 
 const isBcryptAvailable = typeof bcrypt !== 'undefined';
-
+document.querySelectorAll('.reg input').forEach(input => {
+  input.setAttribute('autocomplete', 'off');
+});
 export async function HashPassword(password) {
   if (isBcryptAvailable) {
     //check if bcrypte is working
@@ -58,34 +60,28 @@ function validateEmail(email) {
 function highlightField(fieldId) {
   const field = document.getElementById(fieldId);
   const container = document.querySelector('.reg');
-  
-  // Add shake animation
   field.classList.add("shake", "invalid");
   container.classList.add("shake");
-  
-  // Scroll to the field and focus
   field.scrollIntoView({ behavior: "smooth", block: "center" });
   field.focus();
-  
-  // Remove shake animation after 500ms
   setTimeout(() => {
     field.classList.remove("shake");
     container.classList.remove("shake");
   }, 500);
-}
-
-document.getElementById('Regsiterbutn').addEventListener('click', async function (e) {
+}document.getElementById('Regsiterbutn').addEventListener('click', async function (e) {
   e.preventDefault();
   
-
+  // Validate all fields are filled
   const inputs = document.querySelectorAll('.reg input');
   let isValid = true;
   let firstInvalidField = null;
-
+  
+  // First clear previous invalid markers
   inputs.forEach(input => {
     input.classList.remove("invalid");
   });
-
+  
+  // Check if any fields are empty
   inputs.forEach(input => {
     if (!input.value.trim()) {
       isValid = false;
@@ -97,58 +93,46 @@ document.getElementById('Regsiterbutn').addEventListener('click', async function
     }
   });
 
+  // If any field is empty, highlight and return
   if (!isValid) {
     if (firstInvalidField) {
       highlightField(firstInvalidField.id);
     }
-    showMessage("Please fill in all fields", true);
+    showMessage("Error", "Please fill in all fields", true);
     return;
   }
   
+  // Validate username is not taken
   const waitforfunction = await checkIfUsernameIsUsed();
   if (waitforfunction === false) {
-    showMessage("Username is already in use", true);
+    showMessage("Error", "Username is already in use", true);
     return;
   }
   
+  // Validate phone number
   const checknum = await checkTelephone();
   if (checknum === false) {
-    showMessage("Please enter a valid phone number", true);
+    showMessage("Error", "Please enter a valid phone number", true);
     return;
   }
   
-
-  showMessage("Registration successful!", false);
-});
-
-
-Regsiterbutn.addEventListener('click', async function (e) {
-  e.preventDefault();
-
-  const waitforfunction = await checkIfUsernameIsUsed();
-  if (waitforfunction === false) {
-    showMessage("username is already in use", true);
-    return;
-  }
-
-  const checknum = await checkTelephone();
-  if (checknum === false) {
-    showMessage("Please enter a valid phone number", true);
+  // Validate email
+  const email = document.getElementById("email").value;
+  const isEmailValid = validateEmail(email);
+  if (!isEmailValid) {
+    showMessage("Error", "Invalid email address", true);
     return;
   }
 
   try {
+    // Hash password and security answer
     const rawpass = document.getElementById("pass").value;
     const hashedpass = await HashPassword(rawpass);
 
     const rawanswer = document.getElementById("answr").value;
     const hashedanswer = await Hashanwsr(rawanswer);
-  const email = document.getElementById("email").value;
-  const isEmailValid = validateEmail(email);
-  if (!isEmailValid) {
-    showMessage("Invalid email address", true);
-    return;
-  }
+    
+    // Create data object
     const data = {
       pers_nom: document.getElementById("Nom").value,
       pers_prenom: document.getElementById("Prenom").value,
@@ -161,29 +145,35 @@ Regsiterbutn.addEventListener('click', async function (e) {
       type: document.getElementById("Type").value,
       securti_question: document.getElementById("qts").value,
       securti_anwser: hashedanswer,
-          email: valdem,
+      email: email,  // Fixed: use the actual email instead of validation result
     };
 
+    console.log("Submitting registration data:", { ...data, password: "[REDACTED]", securti_anwser: "[REDACTED]" });
+
+    // Insert data into Supabase
     const { error } = await supabase
       .from('personnellee')
       .insert([data]);
 
     if (error) {
-      showMessage('Error inserting data: ' + error.message, true);
+      console.error("Database error:", error);
+      showMessage("Registration Error", 'Error inserting data: ' + error.message, true);
     } else {
-      showMessage('Registration successful!');
+      showMessage("Success", 'Registration successful!');
+      // Clear form fields
       [
         "Nom", "Prenom", "user", "pass", "Ville",
-        "Adress", "Tel", "Cin", "qts", "answr"
-      ].forEach(id => document.getElementById(id).value = "");
+        "Adress", "Tel", "Cin", "qts", "answr", "email"
+      ].forEach(id => {
+        const element = document.getElementById(id);
+        if (element) element.value = "";
+      });
     }
   } catch (err) {
-    showMessage('An error occurred: ' + err.message, true);
     console.error('Registration error:', err);
+    showMessage("Error", 'An error occurred: ' + err.message, true);
   }
 });
-
-
 const messageBox = document.getElementById('messageBox');
 
 function showMessage(text, isError = false) {

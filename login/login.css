@@ -47,7 +47,7 @@
             transition: color 0.3s ease;
         }
 
-        .form-group input[type="email"],
+        .form-group input[type="text"],
         .form-group input[type="password"] {
             width: 100%;
             padding: 1rem;
@@ -106,7 +106,7 @@
             font-size: 0.8rem;
         }
 
-        .login-button {
+        #lgnb {
             width: 100%;
             padding: 1rem;
             background: linear-gradient(to right, #4a90e2, #6f52cc);
@@ -120,7 +120,7 @@
             letter-spacing: 0.5px;
         }
 
-        .login-button:hover {
+        #lgnb:hover {
             transform: translateY(-3px);
             box-shadow: 0 10px 20px rgba(74, 144, 226, 0.3);
         }

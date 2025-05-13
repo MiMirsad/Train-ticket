@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Train Tickets Registration</title>
+    <link rel="stylesheet" href="gare.css">
+</head>
+<body>
+
+    <div class="page-container">
+        <div class="header">
+            <h1>Train Tickets Registration</h1>
+        </div>
+<div class="wrapper">
+        <div class="gare-form">
+            <h2 id="formTitle">Add New Station</h2>
+            <form id="gareForm">
+                
+                <input type="text" id="gare_name" name="gare_name" placeholder="Station Name" required>
+                
+                <div class="checkbox-group">
+                    <div class="checkbox-container">
+                        <input type="checkbox" id="tnr_supp" name="tnr_supp">
+                        <label for="tnr_supp">TNR Support</label>
+                    </div>
+                    
+                    <div class="checkbox-container">
+                        <input type="checkbox" id="atlas_supp" name="atlas_supp">
+                        <label for="atlas_supp">Atlas Support</label>
+                    </div>
+                    
+                    <div class="checkbox-container">
+                        <input type="checkbox" id="alboraq_supp" name="alboraq_supp">
+                        <label for="alboraq_supp">Al Boraq Support</label>
+                    </div>
+                </div>
+                
+                <button type="submit" class="submit-btn">Add Station</button>
+            </form>
+            <div id="messageBox"></div>
+        </div>
+                 <div class="gare-table-container">
+    <h2 class="table-title">Registered Stations</h2>
+    <table id="gareTable">
+        <thead>
+            <tr>
+                <th>Station Name</th>
+                <th>TNR</th>
+                <th>Atlas</th>
+                <th>Al Boraq</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+</div>
+    </div>
+   
+    </div>
+
+    <div class="background-train">
+        <div class="train-body">
+            <div class="train-window"></div>
+            <div class="train-wheel"></div>
+            <div class="train-wheel"></div>
+            <div class="smoke"></div>
+            <div class="smoke"></div>
+            <div class="smoke"></div>
+        </div>
+    </div>
+
+
+    <script type="module" src="gare.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bcryptjs@2.4.3/dist/bcrypt.min.js"></script>
+</body>
+</html>
