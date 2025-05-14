@@ -97,10 +97,9 @@ document.getElementById('lgnb').addEventListener('click', async (e) => {
     if (isMatch) {
       console.log('Login successful, user type:', userData.type);
       showMessage('Success', 'Login successful!', () => {
-        // Redirect after the user closes the message
         if (userData.type === 'admin') {
           console.log('Redirecting to admin page');
-          window.location.href = './admin/admin.html';
+          window.location.href = '/dashboard/dash.html';
         } else if (userData.type === 'user') {
           console.log('Redirecting to user page');
           window.location.href = './user/user.html';
